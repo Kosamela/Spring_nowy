@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import java.util.List;
 
+
 @Service
 public class TrainingRaportService {
     private final UserRepository userRepository;
@@ -27,7 +28,7 @@ public class TrainingRaportService {
         return "Your weekly dose of trainings: " + trainingCount+ "\n" +
                 "Your last activity was: " + lastTraining.getActivityType().toString();
     }
-    private void sendRaport(String email, String raport){
+    private void prepRaport(String email, String raport){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Weekly training raport");
@@ -35,7 +36,11 @@ public class TrainingRaportService {
         mailSender.send(message);
     }
     @Scheduled(cron = "0 0 0 * * MON")
-    public void generateTrainingRaport() {
-        //TODO
+    public void generateAndSendTrainingRaport() {
+        List<User> users = userRepository.findAll();
+        for(User user : users){
+            String raport = weekRaport(user);
+            prepRaport(user.getEmail(), raport);
+        }
     }
 }

@@ -1,4 +1,15 @@
 spring:
+  mail:
+    host: 'sandbox.smtp.mailtrap.io'
+    port: 587
+    username: '866ae96711e9ca'
+    password: 'b37b938171cc5b'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     url: "jdbc:h2:mem:testdb"
     driver-class-name: "org.h2.Driver"
