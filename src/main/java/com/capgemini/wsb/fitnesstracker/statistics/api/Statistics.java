@@ -26,7 +26,11 @@ public class Statistics {
     @Column(name = "total_distance")
     private double totalDistance;
 
+    @Column(name = "total_avrdistance")
+    private double totalAvrDistance;
+
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
+
 
 }

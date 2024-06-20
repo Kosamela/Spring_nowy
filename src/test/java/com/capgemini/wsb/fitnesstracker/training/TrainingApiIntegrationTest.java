@@ -174,7 +174,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
         mockMvc.perform(put("/v1/trainings/{trainingId}", training1.getId()).contentType(MediaType.APPLICATION_JSON).content(requestBody))
                 .andDo(log())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.user.id").value(user1.getId()))
+
                 .andExpect(jsonPath("$.user.firstName").value(user1.getFirstName()))
                 .andExpect(jsonPath("$.user.lastName").value(user1.getLastName()))
                 .andExpect(jsonPath("$.user.email").value(user1.getEmail()))

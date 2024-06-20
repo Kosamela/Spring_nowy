@@ -2,14 +2,12 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,19 +49,13 @@ public class TrainingServiceImpl implements TrainingProvider {
     public List<Training> getTrainingsByActivityType(ActivityType activityType) {
         return trainingRepository.findByActivityType(activityType);
     }
-
+//endpoint do statystyk, servis do statystyk, controller
     public Training updateTraining(Long trainingId, Training updatedTraining) {
-        Optional<Training> existingTrainingOpt = trainingRepository.findById(trainingId);
-        if (existingTrainingOpt.isPresent()) {
-            Training existingTraining = existingTrainingOpt.get();
-            existingTraining.setDistance(updatedTraining.getDistance());
-            existingTraining.setAverageSpeed(updatedTraining.getAverageSpeed());
-            existingTraining.setActivityType(updatedTraining.getActivityType());
-            return trainingRepository.save(existingTraining);
-        } else {
-            throw new EntityNotFoundException("Training not found");
-        }
+        Training existingTrainingOpt = trainingRepository.findById(trainingId).orElseThrow(EntityNotFoundException::new);
+        Training updateTreningu = TrainingMapper.mapowanieTreningu(existingTrainingOpt, updatedTraining);
+        return trainingRepository.save(updateTreningu);
     }
+
 
     @Override
     public Optional<Training> getTraining(final Long trainingId) {

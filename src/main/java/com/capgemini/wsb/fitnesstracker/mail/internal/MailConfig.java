@@ -16,8 +16,8 @@ class MailConfig {
         mailSender.setHost("sandbox.smtp.mailtrap.io");
         mailSender.setPort(587);
 
-        mailSender.setUsername("866ae96711e9ca");
-        mailSender.setPassword("b37b938171cc5b");
+        mailSender.setUsername("292183fd28bb85");
+        mailSender.setPassword("51cbfe7be9c342");
 
         return mailSender;
     }
