@@ -24,7 +24,7 @@ public class TrainingRaportService {
         List<Training> trainingList = trainingRepository.findByUserId(user.getId());
         Training lastTraining = trainingList.get(0);
         long trainingCount = trainingList.size();
-        return "Your weekly dose of trainings: " trainingCount+ "\n" +
+        return "Your weekly dose of trainings: " + trainingCount+ "\n" +
                 "Your last activity was: " + lastTraining.getActivityType().toString();
     }
     private void sendRaport(String email, String raport){
